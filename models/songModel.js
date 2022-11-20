@@ -10,22 +10,22 @@ const songSchema = new Schema(
 		},
 		artist: {
 			type: mongoose.Schema.Types.ObjectId,
-			required: true,
+			required: false,
 			ref: 'Artist',
 		},
 		arranger: {
 			type: mongoose.Schema.Types.ObjectId,
-			required: true,
+			required: false,
 			ref: 'Arranger',
 		},
 		style: {
 			type: mongoose.Schema.Types.ObjectId,
-			required: true,
+			required: false,
 			ref: 'Style',
 		},
 		status: {
 			type: mongoose.Schema.Types.ObjectId,
-			required: true,
+			required: false,
 			ref: 'Status',
 		},
 		difficulty: {
