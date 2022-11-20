@@ -1,0 +1,95 @@
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+
+const songSchema = new Schema(
+	{
+		title: {
+			type: String,
+			required: true,
+		},
+		artist: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: 'Artist',
+		},
+		arranger: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: 'Arranger',
+		},
+		style: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: 'Style',
+		},
+		status: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: 'Status',
+		},
+		difficulty: {
+			type: Number,
+			required: true,
+			default: 3,
+		},
+		isFavourite: {
+			type: Boolean,
+			default: false,
+			required: true,
+		},
+		// favourite: {
+		// 	type: String,
+		// 	required: false,
+		// },
+		// pages: {
+		// 	type: Number,
+		// 	required: false,
+		// },
+		// format: {
+		// 	type: String,
+		// 	required: false,
+		// },
+
+		deadlineDate: {
+			type: Date,
+			required: false,
+		},
+		reason: {
+			type: String,
+			required: false,
+		},
+		// selectedFile: String,
+		// createdAt: {
+		// 	type: Date,
+		// 	required: true,
+		// 	default: Date.now,
+		// },
+		// title: String,
+		// message: String,
+		// creator: String,
+		// tags: [String],
+		selectedFile: String,
+		// likeCount: {
+		// 	type: Number,
+		// 	default: 0,
+		// },
+		createdAt: {
+			type: Date,
+			default: new Date(),
+		},
+		user_id: {
+			type: String,
+			// required: true,
+		},
+	},
+	{ timestamps: true }
+);
+
+// fire a function after doc is saved to db - 'save' or 'remove' etc
+songSchema.post('save', function (doc, next) {
+	console.log('new song was created & saved', doc);
+	next();
+});
+
+module.exports = mongoose.model('Song', songSchema);
