@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const styleSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true,
-	},
-	createdAt: {
-		type: Date,
-		required: true,
-		default: Date.now,
-	},
-});
+// const styleSchema = new mongoose.Schema({
+// 	name: {
+// 		type: String,
+// 		required: true,
+// 	},
+// 	createdAt: {
+// 		type: Date,
+// 		required: true,
+// 		default: Date.now,
+// 	},
+// });
 
-module.exports = mongoose.model('Style', styleSchema);
+// module.exports = mongoose.model('Style', styleSchema);

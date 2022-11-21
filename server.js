@@ -27,6 +27,11 @@ const cors = require('cors');
 
 const userRoutes = require('./routes/user');
 const songRoutes = require('./routes/songs');
+const artistRoutes = require('./routes/artists');
+const arrangerRoutes = require('./routes/arrangers');
+const statusRoutes = require('./routes/status');
+const styleRoutes = require('./routes/styles');
+
 // const indexRouter = require('./routes/index');
 // const userRouter = require('./routes/users');
 // const songsRouter = require('./routes/songs');
@@ -82,6 +87,10 @@ app.use((req, res, next) => {
 
 app.use('/api/user', userRoutes);
 app.use('/api/songs', songRoutes);
+app.use('/api/artists', artistRoutes);
+app.use('/api/arrangers', arrangerRoutes);
+app.use('/api/status', statusRoutes);
+app.use('/api/styles', styleRoutes);
 
 // connect to db
 mongoose
