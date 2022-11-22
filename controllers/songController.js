@@ -10,6 +10,7 @@ const Style = require('../models/Style');
 const getSongs = async (req, res) => {
 	try {
 		const songs = await Song.find()
+			.sort({ createdAt: 1 })
 			.populate([
 				{
 					path: 'artist',
