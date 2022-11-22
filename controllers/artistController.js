@@ -3,7 +3,10 @@ const Artist = require('../models/artistModel');
 
 const getArtists = async (req, res) => {
 	try {
-		const artists = await Artist.find();
+		const artists = await Artist.find().sort({
+			name: 1,
+		});
+		// const artists = await Artist.find();
 
 		res.status(200).json(artists);
 	} catch (error) {

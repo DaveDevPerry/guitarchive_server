@@ -3,7 +3,10 @@ const Arranger = require('../models/arrangerModel');
 
 const getArrangers = async (req, res) => {
 	try {
-		const arrangers = await Arranger.find();
+		const arrangers = await Arranger.find().sort({
+			name: 1,
+		});
+		// const arrangers = await Arranger.find();
 
 		res.status(200).json(arrangers);
 	} catch (error) {

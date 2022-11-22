@@ -38,6 +38,11 @@ const songSchema = new Schema(
 			default: false,
 			required: true,
 		},
+		isTab: {
+			type: Boolean,
+			default: true,
+			required: true,
+		},
 		// favourite: {
 		// 	type: String,
 		// 	required: false,
