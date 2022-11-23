@@ -6,6 +6,7 @@ const arrangerSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 			unique: true,
+			lowercase: true,
 		},
 		createdAt: {
 			type: Date,
