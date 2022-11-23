@@ -72,6 +72,8 @@ const createSong = async (req, res) => {
 		title,
 		artist,
 		arranger,
+		// newArtist,
+		// newArranger,
 		style,
 		status,
 		difficulty,
@@ -83,6 +85,22 @@ const createSong = async (req, res) => {
 	} = req.body;
 	// const user_id = req.user._id;
 
+	// const newArtistDoc = new Artist({
+	// 	name: 'new artist name',
+	// });
+	// await newArtistDoc.save();
+	// let addNewArtist;
+	// let artistID;
+	// if (newArtist !== '') {
+	// 	const addNewArtist = await Artist.create({
+	// 		name: newArtist,
+	// 	});
+	// 	await addNewArtist.save();
+	// 	console.log(addNewArtist, 'add new artist id');
+	// 	artistID = await addNewArtist._id;
+	// } else {
+	// 	artistID = artist;
+	// }
 	// let song = new Song({
 	// 	title: req.body.title,
 	// 	difficulty: req.body.difficulty,
