@@ -260,16 +260,24 @@ const createSong = async (req, res) => {
 // };
 
 const updateSong = async (req, res) => {
-	const { id: _id } = req.params;
-	const song = req.body;
+	// const { id: _id } = req.params;
+	const { updatedSongData } = req.body;
+	console.log(updatedSongData, 'updated song data');
+	// const song = req.body;
+	// console.log(song, 'song in update');
+	// console.log(id, 'id in update');
 
-	if (!mongoose.Types.ObjectId.isValid(_id))
+	if (!mongoose.Types.ObjectId.isValid(updatedSongData.songID))
 		return res.status(404).send('No song with that ID!');
 
+	const _id = updatedSongData.songID;
+
 	const updatedSong = await Song.findByIdAndUpdate(
-		_id,
-		{ ...song, _id },
+		updatedSongData.songID,
+		{ ...updatedSongData, _id },
 		{
+			// title: updatedSongData.title,
+			// isFavourite: updatedSongData.isFavourite,
 			new: true,
 		}
 	);
