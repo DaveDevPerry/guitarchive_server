@@ -115,7 +115,7 @@ const createArranger = async (req, res) => {
 		res.status(201).json(newArranger);
 	} catch (err) {
 		console.log(err);
-		res.status(409).json({ message: error.message });
+		res.status(409).json({ message: err.message });
 	}
 };
 

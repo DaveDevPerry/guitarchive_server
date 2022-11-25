@@ -10,7 +10,9 @@ const Style = require('../models/Style');
 const getSongs = async (req, res) => {
 	try {
 		const songs = await Song.find()
-			.sort({ createdAt: 1 })
+			// .sort({ createdAt: 1 })
+			.sort({ deadlineDate: 1 })
+
 			.populate([
 				{
 					path: 'artist',
@@ -72,8 +74,6 @@ const createSong = async (req, res) => {
 		title,
 		artist,
 		arranger,
-		// newArtist,
-		// newArranger,
 		style,
 		status,
 		difficulty,
@@ -84,41 +84,20 @@ const createSong = async (req, res) => {
 		selectedFile,
 	} = req.body;
 	// const user_id = req.user._id;
+	console.log(
+		selectedFile.substring(0, selectedFile.indexOf(';')),
+		'selected file'
+	);
+	const getString = selectedFile.substring(0, selectedFile.indexOf(';'));
+	const getFileType = getString.split('/')[1];
+	// console.log(
+	// 	selectedFile.substring(0, selectedFile.indexOf(';')),
+	// 	'selected file'
+	// );
+	console.log(getFileType, 'file type');
 
-	// const newArtistDoc = new Artist({
-	// 	name: 'new artist name',
-	// });
-	// await newArtistDoc.save();
-	// let addNewArtist;
-	// let artistID;
-	// if (newArtist !== '') {
-	// 	const addNewArtist = await Artist.create({
-	// 		name: newArtist,
-	// 	});
-	// 	await addNewArtist.save();
-	// 	console.log(addNewArtist, 'add new artist id');
-	// 	artistID = await addNewArtist._id;
-	// } else {
-	// 	artistID = artist;
-	// }
-	// let song = new Song({
-	// 	title: req.body.title,
-	// 	difficulty: req.body.difficulty,
-	// 	pages: req.body.pages,
-	// 	format: req.body.format,
-	// 	deadlineDate: req.body.deadlineDate,
-	// 	reason: req.body.reason,
-	// 	favourite: req.body.favourite,
+	// const fileExtension = getFileType === 'pdf' ? 'pdf' : 'gp';
 
-	// 	// venue: req.body.venue,
-	// 	// genre: req.body.genre,
-	// 	// genre: if(req.body.genre[1] !== null){
-	// 	// 	req.body.genre[1];
-	// 	// },
-	// 	// newGenre: req.body.newGenre,
-	// 	// people: req.body.people,
-	// 	// comments: req.body.comments,
-	// });
 	const song = new Song({
 		title,
 		artist,
@@ -131,95 +110,18 @@ const createSong = async (req, res) => {
 		deadlineDate,
 		reason,
 		selectedFile,
+		fileType: getFileType,
 		// user_id,
 	});
-
-	// const checkArtists = req.body.artist;
-	// let newArtist;
-	// console.log(checkArtists);
-	// if (checkArtists[1] !== '') {
-	// 	const getNewArtist = new Artist({
-	// 		name: req.body.artist[1],
-	// 	});
-	// 	const saveArtist = await getNewArtist.save();
-	// 	newArtist = saveArtist.id;
-	// } else {
-	// 	newArtist = req.body.artist[0];
-	// }
-	// song.artist = newArtist;
-
-	// const checkArrangers = req.body.arranger;
-	// let newArranger;
-	// if (checkArrangers[1] !== '') {
-	// 	const getNewArranger = new Arranger({
-	// 		name: req.body.arranger[1],
-	// 	});
-	// 	const saveArranger = await getNewArranger.save();
-	// 	newArranger = saveArranger.id;
-	// } else {
-	// 	newArranger = req.body.arranger[0];
-	// }
-	// song.arranger = newArranger;
-
-	// const checkStyles = req.body.style;
-	// let newStyle;
-	// console.log(checkStyles);
-	// if (checkStyles[1] !== '') {
-	// 	const getNewStyle = new Style({
-	// 		name: req.body.style[1],
-	// 	});
-	// 	const saveStyle = await getNewStyle.save();
-	// 	newStyle = saveStyle.id;
-	// } else {
-	// 	newStyle = req.body.style[0];
-	// }
-	// song.style = newStyle;
-
-	// const checkStatuses = req.body.status;
-	// let newStatus;
-	// console.log(checkStatuses);
-	// if (checkStatuses[1] !== '') {
-	// 	const getNewStatus = new Status({
-	// 		name: req.body.status[1],
-	// 	});
-	// 	const saveStatus = await getNewStatus.save();
-	// 	newStatus = saveStatus.id;
-	// } else {
-	// 	newStatus = req.body.status[0];
-	// }
-	// song.status = newStatus;
 
 	try {
 		console.log('full song', song);
 		const newSong = await song.save();
-		// res.redirect(`songs/${newSong.id}`);
 		res.status(201).json(newSong);
 	} catch (err) {
 		console.log(err);
-		res.status(409).json({ message: error.message });
+		res.status(409).json({ message: err.message });
 	}
-
-	// const newSong = new Song({
-	// 	title,
-	// 	artist,
-	// 	arranger,
-	// 	style,
-	// 	status,
-	// 	// difficulty,
-	// 	// isFavourite,
-	// 	// deadlineDate,
-	// 	// reason,
-	// 	selectedFile,
-	// 	// user_id,
-	// });
-
-	// try {
-	// 	await newSong.save();
-
-	// 	res.status(201).json(newSong);
-	// } catch (error) {
-	// 	res.status(409).json({ message: error.message });
-	// }
 };
 // const createSong = async (req, res) => {
 // 	const {

@@ -51,10 +51,10 @@ const songSchema = new Schema(
 		// 	type: Number,
 		// 	required: false,
 		// },
-		// format: {
-		// 	type: String,
-		// 	required: false,
-		// },
+		fileType: {
+			type: String,
+			required: false,
+		},
 
 		deadlineDate: {
 			type: Date,
