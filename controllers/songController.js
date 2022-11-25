@@ -8,6 +8,7 @@ const Artist = require('../models/Artist');
 const Style = require('../models/Style');
 
 const getSongs = async (req, res) => {
+	console.log(req.user._id, 'user id');
 	try {
 		const songs = await Song.find()
 			// .sort({ createdAt: 1 })
@@ -83,20 +84,16 @@ const createSong = async (req, res) => {
 		reason,
 		selectedFile,
 	} = req.body;
-	// const user_id = req.user._id;
+	const user_id = req.user._id;
+	console.log(user_id, 'user id - create song');
 	console.log(
 		selectedFile.substring(0, selectedFile.indexOf(';')),
 		'selected file'
 	);
 	const getString = selectedFile.substring(0, selectedFile.indexOf(';'));
 	const getFileType = getString.split('/')[1];
-	// console.log(
-	// 	selectedFile.substring(0, selectedFile.indexOf(';')),
-	// 	'selected file'
-	// );
-	console.log(getFileType, 'file type');
 
-	// const fileExtension = getFileType === 'pdf' ? 'pdf' : 'gp';
+	console.log(getFileType, 'file type');
 
 	const song = new Song({
 		title,
@@ -111,7 +108,7 @@ const createSong = async (req, res) => {
 		reason,
 		selectedFile,
 		fileType: getFileType,
-		// user_id,
+		user_id,
 	});
 
 	try {
