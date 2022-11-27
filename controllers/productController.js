@@ -1,8 +1,5 @@
-// const User = require('../models/User');
-// const Song = require('../models/Song');
-// const Song = require('../models/songModel');
 const mongoose = require('mongoose');
-const Product = require('../models/products');
+const Song = require('../models/songModel');
 
 // fastify.register(require("fastify-cors"), function (instance) {
 //   return (req, callback) => {
@@ -15,24 +12,90 @@ const Product = require('../models/products');
 //   return { up: true };
 // });
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 5;
+// const ITEMS_PER_PAGE = 2;
 
 const getProducts = async (request, res) => {
 	const page = request.query.page || 1;
+	console.log(request.query, 'req query');
 
 	// Put all your query params in here
 	const query = {};
+	// console.log(query, 'query');
+	// const query = {
+	// 	isFavourite: true,
+	// };
+	// console.log(query, 'query');
 
 	try {
 		const skip = (page - 1) * ITEMS_PER_PAGE; // 1 * 20 = 20
 
-		const countPromise = Product.estimatedDocumentCount(query);
+		const countPromise = Song.estimatedDocumentCount(query);
 
-		const itemsPromise = Product.find(query).limit(ITEMS_PER_PAGE).skip(skip);
+		const itemsPromise = Song.find(query)
+			// .sort({ deadlineDate: 1 })
+			// .sort({ deadlineDate: null })
+			.populate([
+				{
+					path: 'artist',
+					model: 'Artist',
+					select: '_id name', //Fields you want to return in this populate
+				},
+				{
+					path: 'arranger',
+					model: 'Arranger',
+					select: '_id name', //Fields you want to return in this populate
+				},
+				{
+					path: 'style',
+					model: 'Style',
+					select: '_id name', //Fields you want to return in this populate
+				},
+				{
+					path: 'status',
+					model: 'Status',
+					select: '_id name', //Fields you want to return in this populate
+				},
+			])
+			.limit(ITEMS_PER_PAGE)
+			.skip(skip);
+		// const itemsPromise = Song.find(query).limit(ITEMS_PER_PAGE).skip(skip);
+
+		// const songsPromise = Song.find()
+		// 	// .sort({ createdAt: 1 })
+		// 	.sort({ deadlineDate: 1 })
+
+		// 	.populate([
+		// 		{
+		// 			path: 'artist',
+		// 			model: 'Artist',
+		// 			select: '_id name', //Fields you want to return in this populate
+		// 		},
+		// 		{
+		// 			path: 'arranger',
+		// 			model: 'Arranger',
+		// 			select: '_id name', //Fields you want to return in this populate
+		// 		},
+		// 		{
+		// 			path: 'style',
+		// 			model: 'Style',
+		// 			select: '_id name', //Fields you want to return in this populate
+		// 		},
+		// 		{
+		// 			path: 'status',
+		// 			model: 'Status',
+		// 			select: '_id name', //Fields you want to return in this populate
+		// 		},
+		// 	])
+		// 	.exec();
 
 		const [count, items] = await Promise.all([countPromise, itemsPromise]);
 
-		const pageCount = count / ITEMS_PER_PAGE; // 400 items / 20 = 20
+		// const pageCount = count / ITEMS_PER_PAGE; // 400 items / 20 = 20
+		const pageCount =
+			(count / ITEMS_PER_PAGE) % 1 > 0
+				? Math.ceil(count / ITEMS_PER_PAGE)
+				: count / ITEMS_PER_PAGE; // 400 items / 20 = 20
 
 		res.status(200).json({
 			pagination: {
@@ -64,80 +127,66 @@ const getProducts = async (request, res) => {
 module.exports = {
 	getProducts,
 };
-// fastify.get("/products", async (request, reply) => {
-//   const page = request.query.page || 1;
+// const mongoose = require('mongoose');
+// const Product = require('../models/products');
 
-//   // Put all your query params in here
-//   const query = {};
+// // fastify.register(require("fastify-cors"), function (instance) {
+// //   return (req, callback) => {
+// //     const corsOptions = { origin: true };
+// //     callback(null, corsOptions); // callback expects two parameters: error and options
+// //   };
+// // });
 
-//   try {
-//     const skip = (page - 1) * ITEMS_PER_PAGE; // 1 * 20 = 20
+// // fastify.get("/healthcheck", async (request, reply) => {
+// //   return { up: true };
+// // });
 
-//     const countPromise = Product.estimatedDocumentCount(query);
+// const ITEMS_PER_PAGE = 10;
 
-//     const itemsPromise = Product.find(query).limit(ITEMS_PER_PAGE).skip(skip);
+// const getProducts = async (request, res) => {
+// 	const page = request.query.page || 1;
 
-//     const [count, items] = await Promise.all([countPromise, itemsPromise]);
+// 	// Put all your query params in here
+// 	const query = {};
 
-//     const pageCount = count / ITEMS_PER_PAGE; // 400 items / 20 = 20
+// 	try {
+// 		const skip = (page - 1) * ITEMS_PER_PAGE; // 1 * 20 = 20
 
-//     return {
-//       pagination: {
-//         count,
-//         pageCount,
-//       },
-//       items,
-//     };
-//   } catch (e) {
-//     console.error(e);
-//     return e;
-//   }
-// });
+// 		const countPromise = Product.estimatedDocumentCount(query);
 
-// module.exports.songs_get = async (req, res) => {
-// 	res.render('songs');
-// 	const arrangers = await Arranger.find({});
-// 	const statuses = await Status.find({});
-// 	const songs = await Song.find({})
-// 		.populate([
-// 			{
-// 				path: 'arranger',
-// 				model: 'Arranger',
-// 				select: '_id name', //Fields you want to return in this populate
+// 		const itemsPromise = Product.find(query).limit(ITEMS_PER_PAGE).skip(skip);
+
+// 		const [count, items] = await Promise.all([countPromise, itemsPromise]);
+
+// 		const pageCount = count / ITEMS_PER_PAGE; // 400 items / 20 = 20
+
+// 		res.status(200).json({
+// 			pagination: {
+// 				count,
+// 				pageCount,
 // 			},
-// 			{
-// 				path: 'status',
-// 				model: 'Status',
-// 				select: '_id name', //Fields you want to return in this populate
-// 			},
-// 		])
-// 		.exec();
-// 	// const statuses = await Song.find({}).
-// 	res.render('songs', {
-// 		songs: songs,
-// 		statuses: statuses,
-// 		arrangers: arrangers,
-// 	});
-// 	// const arrangers = await Arranger.find({});
-// 	// const statuses = await Status.find({});
-// 	// const songs = await Song.find({})
-// 	// 	.populate([
-// 	// 		{
-// 	// 			path: 'arranger',
-// 	// 			model: 'Arranger',
-// 	// 			select: '_id name', //Fields you want to return in this populate
-// 	// 		},
-// 	// 		{
-// 	// 			path: 'status',
-// 	// 			model: 'Status',
-// 	// 			select: '_id name', //Fields you want to return in this populate
-// 	// 		},
-// 	// 	])
-// 	// 	.exec();
-// 	// // const statuses = await Song.find({}).
-// 	// res.render('songs', {
-// 	// 	songs: songs,
-// 	// 	statuses: statuses,
-// 	// 	arrangers: arrangers,
-// 	// });
+// 			items,
+// 		});
+// 		// return {
+// 		// 	pagination: {
+// 		// 		count,
+// 		// 		pageCount,
+// 		// 	},
+// 		// 	items,
+// 		// };
+// 		// return {
+// 		// 	pagination: {
+// 		// 		count,
+// 		// 		pageCount,
+// 		// 	},
+// 		// 	items,
+// 		// };
+// 	} catch (e) {
+// 		console.error(e);
+// 		return e;
+// 	}
+// };
+
+// module.exports = {
+// 	getProducts,
 // };
