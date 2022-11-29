@@ -1,6 +1,12 @@
 const express = require('express');
 
-const { getProducts } = require('../controllers/productController');
+const {
+	getProducts,
+	getPracticing,
+	getFavourites,
+	getTabs,
+	getScores,
+} = require('../controllers/productController');
 // const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
@@ -9,6 +15,14 @@ const router = express.Router();
 
 // users route
 router.get('/', getProducts);
+
+router.get('/practicing', getPracticing);
+
+router.get('/favourites', getFavourites);
+
+router.get('/tabs', getTabs);
+
+router.get('/scores', getScores);
 
 module.exports = router;
 
