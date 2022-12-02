@@ -1,11 +1,13 @@
 const express = require('express');
 
 const {
+	getAllSongs,
 	getProducts,
 	getPracticing,
 	getFavourites,
 	getTabs,
 	getScores,
+	getDeadlines,
 } = require('../controllers/productController');
 // const requireAuth = require('../middleware/requireAuth');
 
@@ -14,7 +16,10 @@ const router = express.Router();
 // router.use(requireAuth);
 
 // users route
-router.get('/', getProducts);
+router.get('/', getAllSongs);
+router.get('/songs', getAllSongs);
+router.get('/products', getProducts);
+// router.get('/', getProducts);
 
 router.get('/practicing', getPracticing);
 
@@ -23,6 +28,8 @@ router.get('/favourites', getFavourites);
 router.get('/tabs', getTabs);
 
 router.get('/scores', getScores);
+
+router.get('/deadlines', getDeadlines);
 
 module.exports = router;
 

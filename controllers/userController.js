@@ -21,8 +21,10 @@ const loginUser = async (req, res) => {
 		console.log(token, 'new user token - user controller - login');
 
 		const userId = user._id;
+		const firstName = await user.firstName;
+		const lastName = await user.lastName;
 
-		res.status(200).json({ email, token, userId });
+		res.status(200).json({ email, token, userId, firstName, lastName });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
