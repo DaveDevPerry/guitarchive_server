@@ -8,6 +8,7 @@ const {
 	getTabs,
 	getScores,
 	getDeadlines,
+	// getPracticing
 } = require('../controllers/productController');
 // const requireAuth = require('../middleware/requireAuth');
 

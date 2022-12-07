@@ -6,7 +6,7 @@ const statusSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 			unique: true,
-			lowercase: true,
+			// lowercase: true,
 		},
 	},
 	{ timestamps: true }
