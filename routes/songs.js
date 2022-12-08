@@ -506,5 +506,3 @@ module.exports = router;
 // 		user.coverImageType = cover.type;
 // 	}
 // }
-
-module.exports = router;
