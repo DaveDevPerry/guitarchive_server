@@ -53,20 +53,20 @@ const createIdea = async (req, res) => {
 
 const updateIdea = async (req, res) => {
 	// const { id: _id } = req.params;
-	const { updatedIdeaData } = req.body;
-	console.log(updatedIdeaData, 'updated idea data');
+	const { updatedSongData } = req.body;
+	console.log(updatedSongData, 'updated idea data');
 	// const idea = req.body;
 	// console.log(idea, 'idea in update');
 	// console.log(id, 'id in update');
 
-	if (!mongoose.Types.ObjectId.isValid(updatedIdeaData.ideaID))
+	if (!mongoose.Types.ObjectId.isValid(updatedSongData.songID))
 		return res.status(404).send('No idea with that ID!');
 
-	const _id = updatedIdeaData.ideaID;
+	const _id = updatedSongData.songID;
 
 	const updatedIdea = await Idea.findByIdAndUpdate(
-		updatedIdeaData.ideaID,
-		{ ...updatedIdeaData, _id },
+		updatedSongData.songID,
+		{ ...updatedSongData, _id },
 		{
 			// title: updatedIdeaData.title,
 			// isComplete: updatedIdeaData.isComplete,

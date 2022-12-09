@@ -10,18 +10,30 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 			unique: true,
+			lowercase: true,
+			trim: true,
 		},
 		password: {
 			type: String,
 			required: true,
+			trim: true,
 		},
 		firstName: {
 			type: String,
 			required: true,
+			lowercase: true,
+			trim: true,
 		},
 		lastName: {
 			type: String,
 			required: true,
+			lowercase: true,
+			trim: true,
+		},
+		createdAt: {
+			type: Date,
+			required: true,
+			default: Date.now,
 		},
 	},
 	{ timestamps: true }
@@ -66,7 +78,7 @@ userSchema.statics.signup = async function (
 		lastName,
 	});
 
-	console.log(user, 'user created');
+	// console.log(user, 'user created');
 
 	return user;
 };
@@ -91,7 +103,7 @@ userSchema.statics.login = async function (email, password) {
 		throw Error('Incorrect password');
 	}
 
-	console.log(user, 'user login static');
+	// console.log(user, 'user login static');
 	return user;
 };
 
