@@ -33,6 +33,7 @@ const statusRoutes = require('./routes/status');
 const styleRoutes = require('./routes/styles');
 const productRoutes = require('./routes/products');
 const ideaRoutes = require('./routes/ideas');
+const requestRoutes = require('./routes/requests');
 
 // const indexRouter = require('./routes/index');
 // const userRouter = require('./routes/users');
@@ -95,6 +96,7 @@ app.use('/api/status', statusRoutes);
 app.use('/api/styles', styleRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/ideas', ideaRoutes);
+app.use('/api/requests', requestRoutes);
 
 // connect to db
 mongoose
