@@ -30,6 +30,11 @@ const userSchema = new Schema(
 			lowercase: true,
 			trim: true,
 		},
+		isAdmin: {
+			type: Boolean,
+			required: true,
+			default: false,
+		},
 		createdAt: {
 			type: Date,
 			required: true,
