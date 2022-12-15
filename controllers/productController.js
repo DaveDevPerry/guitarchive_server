@@ -21,8 +21,8 @@ const SONGS_PER_PAGE = 10;
 
 const getProducts = async (request, res) => {
 	const page = request.query.page || 1;
-	console.log(request.query, 'req query');
-	console.log(request.params, 'req params');
+	// console.log(request.query, 'req query');
+	// console.log(request.params, 'req params');
 	// console.log(request, 'request');
 
 	// Put all your query params in here
@@ -133,8 +133,8 @@ const getProducts = async (request, res) => {
 // const SONGS_PER_PAGE = 10;
 const getAllSongs = async (request, res) => {
 	const page = request.query.page || 1;
-	console.log(request.query, 'req query');
-	console.log(request.params, 'req params');
+	// console.log(request.query, 'req query');
+	// console.log(request.params, 'req params');
 	// console.log(request, 'request');
 
 	// Put all your query params in here
@@ -243,7 +243,7 @@ const getAllSongs = async (request, res) => {
 };
 const getFavourites = async (request, res) => {
 	const page = request.query.page || 1;
-	console.log(request.query, 'req query');
+	// console.log(request.query, 'req query');
 	// Put all your query params in here
 	const query = {
 		isFavourite: { $eq: true },
@@ -295,7 +295,7 @@ const getFavourites = async (request, res) => {
 };
 const getTabs = async (request, res) => {
 	const page = request.query.page || 1;
-	console.log(request.query, 'req query');
+	// console.log(request.query, 'req query');
 	// Put all your query params in here
 	const query = {
 		isTab: { $eq: true },
@@ -347,7 +347,7 @@ const getTabs = async (request, res) => {
 };
 const getDeadlines = async (request, res) => {
 	const page = request.query.page || 1;
-	console.log(request.query, 'req query');
+	// console.log(request.query, 'req query');
 	// Put all your query params in here
 	const query = {
 		deadlineDate: { $ne: null },
@@ -400,7 +400,7 @@ const getDeadlines = async (request, res) => {
 };
 const getScores = async (request, res) => {
 	const page = request.query.page || 1;
-	console.log(request.query, 'req query');
+	// console.log(request.query, 'req query');
 	// Put all your query params in here
 	const query = {
 		isTab: { $eq: false },
@@ -435,8 +435,8 @@ const getScores = async (request, res) => {
 			.skip(skip);
 
 		const [count, items] = await Promise.all([countPromise, itemsPromise]);
-		console.log(count, 'count');
-		console.log(items, 'items');
+		// console.log(count, 'count');
+		// console.log(items, 'items');
 		const pageCount =
 			(count / SONGS_PER_PAGE) % 1 > 0
 				? Math.ceil(count / SONGS_PER_PAGE)
@@ -455,7 +455,7 @@ const getScores = async (request, res) => {
 };
 const getPracticing = async (request, res) => {
 	const page = request.query.page || 1;
-	console.log(request.query, 'req query');
+	// console.log(request.query, 'req query');
 	// Put all your query params in here
 	const query = {
 		'status.name': 'Practicing',
@@ -482,7 +482,7 @@ const getPracticing = async (request, res) => {
 		})
 		.exec((error, items) => {
 			items.map((item) => {
-				console.log(item.status, 'item');
+				// console.log(item.status, 'item');
 				// return item.status !== null;
 			});
 		});
