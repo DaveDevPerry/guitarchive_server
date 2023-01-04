@@ -126,6 +126,113 @@ const createArtist = async (req, res) => {
 // const deleteArtist = async (req,res) => {
 
 // }
+// const SONGS_PER_PAGE = 10;
+
+// const sortBySongsDescending = async (request, res) => {
+// 	const page = request.query.page || 1;
+// 	// console.log(request.query, 'req query');
+// 	// Put all your query params in here
+// 	const query = {
+// 		// isFavourite: { $eq: true },
+// 	};
+// 	try {
+// 		const skip = (page - 1) * SONGS_PER_PAGE; // 1 * 20 = 20
+// 		const countPromise = Artist.countDocuments(query);
+// 		const itemsPromise = Artist.find(query)
+// 		.sort({})
+// 			.populate([
+// 				{
+// 					path: 'artist',
+// 					model: 'Artist',
+// 					select: '_id name', //Fields you want to return in this populate
+// 				},
+// 				{
+// 					path: 'arranger',
+// 					model: 'Arranger',
+// 					select: '_id name', //Fields you want to return in this populate
+// 				},
+// 				{
+// 					path: 'style',
+// 					model: 'Style',
+// 					select: '_id name', //Fields you want to return in this populate
+// 				},
+// 				{
+// 					path: 'status',
+// 					model: 'Status',
+// 					select: '_id name', //Fields you want to return in this populate
+// 				},
+// 			])
+// 			.limit(SONGS_PER_PAGE)
+// 			.skip(skip);
+// 		const [count, items] = await Promise.all([countPromise, itemsPromise]);
+// 		const pageCount =
+// 			(count / SONGS_PER_PAGE) % 1 > 0
+// 				? Math.ceil(count / SONGS_PER_PAGE)
+// 				: count / SONGS_PER_PAGE; // 400 items / 20 = 20
+// 		res.status(200).json({
+// 			pagination: {
+// 				count,
+// 				pageCount,
+// 			},
+// 			items,
+// 		});
+// 	} catch (e) {
+// 		console.error(e);
+// 		return e;
+// 	}
+// };
+// const sortArtists = async (request, res) => {
+// 	const page = request.query.page || 1;
+// 	// console.log(request.query, 'req query');
+// 	// Put all your query params in here
+// 	const query = {
+// 		isFavourite: { $eq: true },
+// 	};
+// 	try {
+// 		const skip = (page - 1) * SONGS_PER_PAGE; // 1 * 20 = 20
+// 		const countPromise = Song.countDocuments(query);
+// 		const itemsPromise = Song.find(query)
+// 			.populate([
+// 				{
+// 					path: 'artist',
+// 					model: 'Artist',
+// 					select: '_id name', //Fields you want to return in this populate
+// 				},
+// 				{
+// 					path: 'arranger',
+// 					model: 'Arranger',
+// 					select: '_id name', //Fields you want to return in this populate
+// 				},
+// 				{
+// 					path: 'style',
+// 					model: 'Style',
+// 					select: '_id name', //Fields you want to return in this populate
+// 				},
+// 				{
+// 					path: 'status',
+// 					model: 'Status',
+// 					select: '_id name', //Fields you want to return in this populate
+// 				},
+// 			])
+// 			.limit(SONGS_PER_PAGE)
+// 			.skip(skip);
+// 		const [count, items] = await Promise.all([countPromise, itemsPromise]);
+// 		const pageCount =
+// 			(count / SONGS_PER_PAGE) % 1 > 0
+// 				? Math.ceil(count / SONGS_PER_PAGE)
+// 				: count / SONGS_PER_PAGE; // 400 items / 20 = 20
+// 		res.status(200).json({
+// 			pagination: {
+// 				count,
+// 				pageCount,
+// 			},
+// 			items,
+// 		});
+// 	} catch (e) {
+// 		console.error(e);
+// 		return e;
+// 	}
+// };
 
 module.exports = {
 	getArtists,
@@ -133,6 +240,9 @@ module.exports = {
 	createArtist,
 	// updateArtist,
 	// deleteArtist
+	// sortArtists,
+	// sortBySongsDescending,
+	// sortBySongsAscending
 };
 
 // const express = require('express');
