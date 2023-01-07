@@ -25,10 +25,18 @@ const loginUser = async (req, res) => {
 		const lastName = await user.lastName;
 		const isAdmin = await user.isAdmin;
 		const yTData = await user.yTData;
+		// const _id = await user._id;
 
-		res
-			.status(200)
-			.json({ email, token, userId, firstName, lastName, isAdmin, yTData });
+		res.status(200).json({
+			email,
+			token,
+			userId,
+			firstName,
+			lastName,
+			isAdmin,
+			yTData,
+			// _id,
+		});
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
@@ -68,4 +76,46 @@ const getUser = async (req, res) => {
 	res.status(200).json(user);
 };
 
-module.exports = { signupUser, loginUser, getUser };
+const updateUser = async (req, res) => {
+	// const { id: _id } = req.params;
+	const { updatedUserData } = req.body;
+	console.log(updatedUserData, 'updated user data');
+
+	if (!mongoose.Types.ObjectId.isValid(updatedUserData.userID))
+		return res.status(404).send('No user with that ID!');
+
+	const updatedUser = await User.findByIdAndUpdate(
+		{ _id: updatedUserData.userID },
+		{
+			...req.body,
+			yTData: updatedUserData.youTubeData,
+			// $addToSet: {
+			// 	rounds: updatedUserData.roundID,
+			// },
+		},
+		{
+			new: true,
+		}
+	);
+
+	// const updatedRound = await Round.findByIdAndUpdate(
+	// 	{ _id: updatedUserData.roundID },
+	// 	{
+	// 		...req.body,
+	// 		$addToSet: {
+	// 			questions: updatedUserData.questionID,
+	// 		},
+	// 	},
+	// 	{
+	// 		// title: updatedQuestionData.title,
+	// 		// isFavourite: updatedQuestionData.isFavourite,
+	// 		new: true,
+	// 	}
+	// );
+
+	// console.log(updatedRound, 'updated round with question id');
+
+	res.json(updatedUser);
+};
+
+module.exports = { signupUser, loginUser, getUser, updateUser };

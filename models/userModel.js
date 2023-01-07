@@ -2,6 +2,29 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
 
+const defaultYTTargets = [
+	{
+		targetViews: 100000,
+		isComplete: false,
+		dateAchieved: null,
+	},
+	{
+		targetViews: 200000,
+		isComplete: false,
+		dateAchieved: null,
+	},
+	{
+		targetViews: 500000,
+		isComplete: false,
+		dateAchieved: null,
+	},
+	{
+		targetViews: 1000000,
+		isComplete: false,
+		dateAchieved: null,
+	},
+];
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
@@ -35,32 +58,94 @@ const userSchema = new Schema(
 			required: true,
 			default: false,
 		},
-		yTData: [
-			{
-				viewTarget: {
-					type: Number,
-					required: true,
-					default: 100000,
-				},
-				isComplete: {
-					type: Boolean,
-					required: true,
-					default: false,
-				},
-			},
-			{
-				viewTarget: {
-					type: Number,
-					required: true,
-					default: 200000,
-				},
-				isComplete: {
-					type: Boolean,
-					required: true,
-					default: false,
-				},
-			},
-		],
+		yTData: {
+			type: [],
+			default: defaultYTTargets,
+			required: true,
+		},
+		// yTData: {
+		// 	type: [
+		// 		{
+		// 			viewTarget: {
+		// 				type: Number,
+		// 				required: true,
+		// 				default: 100000,
+		// 			},
+		// 			isComplete: {
+		// 				type: Boolean,
+		// 				required: true,
+		// 				default: false,
+		// 			},
+		// 			required: true,
+		// 		},
+		// 		{
+		// 			viewTarget: {
+		// 				type: Number,
+		// 				required: true,
+		// 				default: 200000,
+		// 			},
+		// 			isComplete: {
+		// 				type: Boolean,
+		// 				required: true,
+		// 				default: false,
+		// 			},
+		// 			required: true,
+		// 		},
+		// 		{
+		// 			viewTarget: {
+		// 				type: Number,
+		// 				required: true,
+		// 				default: 500000,
+		// 			},
+		// 			isComplete: {
+		// 				type: Boolean,
+		// 				required: true,
+		// 				default: false,
+		// 			},
+		// 			required: true,
+		// 		},
+		// 		{
+		// 			viewTarget: {
+		// 				type: Number,
+		// 				required: true,
+		// 				default: 1000000,
+		// 			},
+		// 			isComplete: {
+		// 				type: Boolean,
+		// 				required: true,
+		// 				default: false,
+		// 			},
+		// 			required: true,
+		// 		},
+		// 	],
+		// 	required: true,
+		// },
+		// yTData: [
+		// 	{
+		// 		viewTarget: {
+		// 			type: Number,
+		// 			required: true,
+		// 			default: 100000,
+		// 		},
+		// 		isComplete: {
+		// 			type: Boolean,
+		// 			required: true,
+		// 			default: false,
+		// 		},
+		// 	},
+		// 	{
+		// 		viewTarget: {
+		// 			type: Number,
+		// 			required: true,
+		// 			default: 200000,
+		// 		},
+		// 		isComplete: {
+		// 			type: Boolean,
+		// 			required: true,
+		// 			default: false,
+		// 		},
+		// 	},
+		// ],
 		// required: false,
 
 		createdAt: {

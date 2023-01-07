@@ -5,6 +5,7 @@ const {
 	signupUser,
 	loginUser,
 	getUser,
+	updateUser,
 } = require('../controllers/userController');
 // const requireAuth = require('../middleware/requireAuth');
 
@@ -19,5 +20,7 @@ router.post('/signup', signupUser);
 
 // get user route
 router.get('/:id', getUser);
+
+router.patch('/:id', updateUser);
 
 module.exports = router;
