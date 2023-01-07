@@ -35,6 +35,34 @@ const userSchema = new Schema(
 			required: true,
 			default: false,
 		},
+		yTData: [
+			{
+				viewTarget: {
+					type: Number,
+					required: true,
+					default: 100000,
+				},
+				isComplete: {
+					type: Boolean,
+					required: true,
+					default: false,
+				},
+			},
+			{
+				viewTarget: {
+					type: Number,
+					required: true,
+					default: 200000,
+				},
+				isComplete: {
+					type: Boolean,
+					required: true,
+					default: false,
+				},
+			},
+		],
+		// required: false,
+
 		createdAt: {
 			type: Date,
 			required: true,

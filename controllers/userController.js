@@ -24,10 +24,11 @@ const loginUser = async (req, res) => {
 		const firstName = await user.firstName;
 		const lastName = await user.lastName;
 		const isAdmin = await user.isAdmin;
+		const yTData = await user.yTData;
 
 		res
 			.status(200)
-			.json({ email, token, userId, firstName, lastName, isAdmin });
+			.json({ email, token, userId, firstName, lastName, isAdmin, yTData });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
