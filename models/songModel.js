@@ -34,6 +34,16 @@ const songSchema = new Schema(
 			required: true,
 			default: 3,
 		},
+		capoFret: {
+			type: Number,
+			required: true,
+			default: 0,
+		},
+		isCapo: {
+			type: Boolean,
+			default: false,
+			required: true,
+		},
 		isFavourite: {
 			type: Boolean,
 			default: false,
@@ -43,6 +53,10 @@ const songSchema = new Schema(
 			type: Boolean,
 			default: true,
 			required: true,
+		},
+		notes: {
+			type: String,
+			required: false,
 		},
 		// favourite: {
 		// 	type: String,
