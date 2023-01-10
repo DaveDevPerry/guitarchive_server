@@ -98,6 +98,8 @@ const createSong = async (req, res) => {
 
 	console.log(getFileType, 'file type');
 
+	const capoIsUsed = capoFret === 0 ? false : true;
+
 	const song = new Song({
 		title,
 		artist,
@@ -105,7 +107,8 @@ const createSong = async (req, res) => {
 		style,
 		status,
 		difficulty,
-		isCapo,
+		isCapo: capoIsUsed,
+		// isCapo: capoFret === 0 ? false : true,
 		capoFret,
 		notes,
 		isFavourite,

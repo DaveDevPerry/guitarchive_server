@@ -8,6 +8,8 @@ const {
 	getTabs,
 	getScores,
 	getDeadlines,
+	getCapo,
+	getNoCapo,
 	// getPracticing
 } = require('../controllers/productController');
 // const requireAuth = require('../middleware/requireAuth');
@@ -27,6 +29,8 @@ router.get('/practicing', getPracticing);
 router.get('/favourites', getFavourites);
 
 router.get('/tabs', getTabs);
+router.get('/capo', getCapo);
+router.get('/no-capo', getNoCapo);
 
 router.get('/scores', getScores);
 

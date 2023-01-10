@@ -345,6 +345,110 @@ const getTabs = async (request, res) => {
 		return e;
 	}
 };
+const getCapo = async (request, res) => {
+	const page = request.query.page || 1;
+	// console.log(request.query, 'req query');
+	// Put all your query params in here
+	const query = {
+		isCapo: { $eq: true },
+	};
+	try {
+		const skip = (page - 1) * SONGS_PER_PAGE; // 1 * 20 = 20
+		const countPromise = Song.countDocuments(query);
+		const itemsPromise = Song.find(query)
+			.populate([
+				{
+					path: 'artist',
+					model: 'Artist',
+					select: '_id name', //Fields you want to return in this populate
+				},
+				{
+					path: 'arranger',
+					model: 'Arranger',
+					select: '_id name', //Fields you want to return in this populate
+				},
+				{
+					path: 'style',
+					model: 'Style',
+					select: '_id name', //Fields you want to return in this populate
+				},
+				{
+					path: 'status',
+					model: 'Status',
+					select: '_id name', //Fields you want to return in this populate
+				},
+			])
+			.limit(SONGS_PER_PAGE)
+			.skip(skip);
+		const [count, items] = await Promise.all([countPromise, itemsPromise]);
+		const pageCount =
+			(count / SONGS_PER_PAGE) % 1 > 0
+				? Math.ceil(count / SONGS_PER_PAGE)
+				: count / SONGS_PER_PAGE; // 400 items / 20 = 20
+		res.status(200).json({
+			pagination: {
+				count,
+				pageCount,
+			},
+			items,
+		});
+	} catch (e) {
+		console.error(e);
+		return e;
+	}
+};
+const getNoCapo = async (request, res) => {
+	const page = request.query.page || 1;
+	// console.log(request.query, 'req query');
+	// Put all your query params in here
+	const query = {
+		isCapo: { $eq: false },
+	};
+	try {
+		const skip = (page - 1) * SONGS_PER_PAGE; // 1 * 20 = 20
+		const countPromise = Song.countDocuments(query);
+		const itemsPromise = Song.find(query)
+			.populate([
+				{
+					path: 'artist',
+					model: 'Artist',
+					select: '_id name', //Fields you want to return in this populate
+				},
+				{
+					path: 'arranger',
+					model: 'Arranger',
+					select: '_id name', //Fields you want to return in this populate
+				},
+				{
+					path: 'style',
+					model: 'Style',
+					select: '_id name', //Fields you want to return in this populate
+				},
+				{
+					path: 'status',
+					model: 'Status',
+					select: '_id name', //Fields you want to return in this populate
+				},
+			])
+			.limit(SONGS_PER_PAGE)
+			.skip(skip);
+		const [count, items] = await Promise.all([countPromise, itemsPromise]);
+		const pageCount =
+			(count / SONGS_PER_PAGE) % 1 > 0
+				? Math.ceil(count / SONGS_PER_PAGE)
+				: count / SONGS_PER_PAGE; // 400 items / 20 = 20
+		res.status(200).json({
+			pagination: {
+				count,
+				pageCount,
+			},
+			items,
+		});
+	} catch (e) {
+		console.error(e);
+		return e;
+	}
+};
 const getDeadlines = async (request, res) => {
 	const page = request.query.page || 1;
 	// console.log(request.query, 'req query');
@@ -809,6 +913,8 @@ module.exports = {
 	getTabs,
 	getScores,
 	getDeadlines,
+	getCapo,
+	getNoCapo,
 };
 // const mongoose = require('mongoose');
 // const Product = require('../models/products');
