@@ -25,6 +25,7 @@ const loginUser = async (req, res) => {
 		const lastName = await user.lastName;
 		const isAdmin = await user.isAdmin;
 		const yTData = await user.yTData;
+		const youtubeData = await user.youtubeData;
 		// const _id = await user._id;
 
 		res.status(200).json({
@@ -35,6 +36,7 @@ const loginUser = async (req, res) => {
 			lastName,
 			isAdmin,
 			yTData,
+			youtubeData,
 			// _id,
 		});
 	} catch (error) {

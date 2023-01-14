@@ -25,6 +25,84 @@ const defaultYTTargets = [
 	},
 ];
 
+const allDefaultYTTargets = [
+	{
+		name: 'views',
+		data: [
+			{
+				target: 50000,
+				isComplete: true,
+				dateAchieved: 1673657776427,
+			},
+			{
+				target: 100000,
+				isComplete: false,
+				dateAchieved: null,
+			},
+			{
+				target: 250000,
+				isComplete: false,
+				dateAchieved: null,
+			},
+			{
+				target: 500000,
+				isComplete: false,
+				dateAchieved: null,
+			},
+		],
+	},
+	{
+		name: 'subs',
+		data: [
+			{
+				target: 100,
+				isComplete: false,
+				dateAchieved: null,
+			},
+			{
+				target: 200,
+				isComplete: false,
+				dateAchieved: null,
+			},
+			{
+				target: 300,
+				isComplete: false,
+				dateAchieved: null,
+			},
+			{
+				target: 500,
+				isComplete: false,
+				dateAchieved: null,
+			},
+		],
+	},
+	{
+		name: 'videos',
+		data: [
+			{
+				target: 50,
+				isComplete: true,
+				dateAchieved: 1673657776427,
+			},
+			{
+				target: 100,
+				isComplete: false,
+				dateAchieved: null,
+			},
+			{
+				target: 150,
+				isComplete: false,
+				dateAchieved: null,
+			},
+			{
+				target: 200,
+				isComplete: false,
+				dateAchieved: null,
+			},
+		],
+	},
+];
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
@@ -61,6 +139,11 @@ const userSchema = new Schema(
 		yTData: {
 			type: [],
 			default: defaultYTTargets,
+			required: true,
+		},
+		youtubeData: {
+			type: [],
+			default: allDefaultYTTargets,
 			required: true,
 		},
 		// yTData: {
