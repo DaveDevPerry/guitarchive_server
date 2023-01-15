@@ -90,7 +90,8 @@ const updateUser = async (req, res) => {
 		{ _id: updatedUserData.userID },
 		{
 			...req.body,
-			yTData: updatedUserData.youTubeData,
+			// yTData: updatedUserData.youTubeData,
+			youtubeData: updatedUserData.youTubeData,
 			// $addToSet: {
 			// 	rounds: updatedUserData.roundID,
 			// },
