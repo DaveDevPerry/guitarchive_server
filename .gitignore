@@ -5,9 +5,9 @@ public
 
 ./data/db.js
 
-/models/Arranger.js
-/models/Artist.js
-/models/Status.js
-/models/Style.js
+# /models/Arranger.js
+# /models/Artist.js
+# /models/Status.js
+# /models/Style.js
 
 
